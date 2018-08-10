@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width-device-width">
+	<title> Typing Speed Test </title>
+	<script src="script.js"> </script>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<!--
+<script>document.write('<script src="http://' + (location.host || '${1:localhost}').split(':')[0] + ':${2:35729}/livereload.js?snipver=1"></' + 'script>')</script>
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+-->
+
+<!--top header with nav bar-->
+<header>
+<section id="top-header">
+	<div id="title"><h2>Kenford's Typing Test</h2></div>
+		<div id="nav-div"> 	
+			<nav>
+				<ul>
+					<li class="button"> <a href="#"> Home </a></li>
+					<li class="button"> <a href="#"> About </a></li>
+					<li class="button"> <a href="#"> Log In </a></li>
+				</ul>
+			</nav>
+		</div>
+</section>
+</header>
+
+<!-- body with test and timer-->
+<body>
+	<div id="background-pic">
+		<h1> Simple Quick and Accurate Results </h1>
+		<p> Welcome to Kenford's Typing Speed Test! Try and type the different types of texts below as fast as you can! </p>
+	</div>
+	<div class="container"> 
+		<!--create the box to contain the quote-->
+		<section class="quote-box">
+			<div id="quote-api">
+				<p> ARE YOU READY???? Select the type of test below and click the 'New Text' button to grab a piece of text to begin! </p>
+			</div>
+		</section>
+	</div>
+
+	<div class="container">
+			<!-- create the box for user input-->
+		<section>
+			<textarea id="typing-box" rows="5" placeholder="The clock starts when you begin typing"></textarea>
+		</section>
+		
+		<!--create the timer-->
+		<section id="clock">
+			<div><h1 class="timer">00:00:00</h1></div>
+			<div><h1 class="CPM"> CPM: 00 </h1></div>
+			<div><h1 class="WPM"> WPM: 00 </h1></div>
+		</section>
+		<section id="option-and-btns">
+			<select class="select-box">
+				<option value="quote">Quotes (Quick Test)</option>
+				<option value="alphanumeric">Alphanumeric (Hard Test)</option>
+				<option value="paragraph">Paragraph (Long Test)</option>
+				<option value="words">List of Words (Words Test)</option>
+			</select>
+			<button class="btn" id="restart">Restart</button>
+			<button class="btn" id="new-text">New Text</button>
+		</section>
+	</div>
+
+    <section id="newsletter">
+        <div class="container">
+        	<h1> Sign Up! </h1>
+        	<form class="side">
+          		<input type="email" placeholder="Enter Email...">
+          		<button type="submit" class="btn" id="sub-button">Subscribe</button>
+        	</form>
+        </div>
+    </section>
+
+    <section class="container" id="footer-nav">
+    	<div>
+	    	<ul>
+				<li class="button"> <a href="#"> Contact </a></li>
+				<li class="button"> <a href="#"> Terms </a></li>
+				<li class="button"> <a href="#"> Privacy Policy </a></li>
+			</ul>
+			<h6> © 2018 Kenford, Inc. </h3>
+		</div>
+    </section>
+</body>
+
+</html>
