@@ -26,6 +26,7 @@ var numWords = 0;
 var letterIndex = 0; var wordIndex = 0;
 var numberOfMistakes = 0;
 var randomLetter; var randomWordsString = "";
+var errorState;
 
 
 // Function Defitions
@@ -153,11 +154,14 @@ function checkStringEquality() {
 		console.log(numberOfMistakes);
 	}
 		else if(textInput == parsedTestText){
+			errorState = false;
 			text.style.border = "8px solid lightblue";
 		}
 		else{
+			if(!errorState)
+				numberOfMistakes++;
+			errorState = true;
 			text.style.border = "8px solid pink";
-			numberOfMistakes++;
 		}
 }
 	
