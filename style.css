@@ -240,7 +240,7 @@ body select {
 
 /* Media Queries
 ------------------*/
-@media only screen and (min-device-width: 320px) and (max-device-width: 750px){
+@media only screen and (min-width: 320px) and (max-width: 750px){
 	.container{
 		width:90%;
 	}
@@ -295,6 +295,10 @@ body select {
 		font-size:15px;
 	}
 
+	.container #quote-api{
+		margin-top:5px;
+	}
+
 	.select-box{
 		width:300px;
 		padding: 5px 30px 5px 13px !important;
@@ -310,12 +314,20 @@ body select {
 		width:135px;
 	}
 
+	#restart{
+		float:none;
+	}
+
 	#clock .timer,
 	#clock .WPM,
 	#clock .CPM {
 		margin:0;
-		width:100px;
-		font-size:10px;
+		width:80px;
+		font-size:12px;
+	}
+
+	#clock{
+		text-align:center;
 	}
 
 	#clock div{	
@@ -323,7 +335,6 @@ body select {
 		margin-bottom:5px;
 		padding:0;
 		width:85px;
-		text-align:center;
 	}
 
 	#footer-nav h6{
