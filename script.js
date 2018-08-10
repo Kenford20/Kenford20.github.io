@@ -63,7 +63,7 @@ function runTimer(){
 	document.querySelector(".timer").innerHTML= displayZero(minutes) + ":" + displayZero(seconds) + ":" + displayZero(ms);
 	ms++;
 
-	displayWPM_and_CPM(minutes, seconds);
+	displayWPM_and_CPM(minutes, seconds, ms);
 	createHTML();
 
 	// time conversions
@@ -116,8 +116,8 @@ function countWords(){
 }
 
 // calculates and displays the words per min and characters per min
-function displayWPM_and_CPM(mins, secs){
-	let totalSeconds = (mins*60) + secs;
+function displayWPM_and_CPM(mins, secs, ms){
+	let totalSeconds = (mins*60) + secs + (ms/100);
 	let textInput = text.value;
 	let numChars = textInput.length;
 	let wpmHTML2 = "CPM: " + CPM;
