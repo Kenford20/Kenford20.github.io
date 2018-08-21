@@ -49,7 +49,7 @@ var cardType = {
 //var socket = io.connect();
 var host = window.location.origin; 
 console.log(host);
-var socket = io(host);
+var socket = io.connect("https://kenford20.github.io/server.js");
 //var socket = io.connect('http://' + host + ":"  + 3000);
 
 
