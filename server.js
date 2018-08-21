@@ -16,7 +16,7 @@ app.get('/',function(req,res){
 //app.use('/client', express.static(__dirname + '/client'));
 app.use(express.static('client'));
 
-server.listen(port);
+server.listen(port, "0.0.0.0");
 console.log('Server started!');
 
 var socketIDlist = [];
