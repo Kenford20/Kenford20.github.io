@@ -46,7 +46,12 @@ var cardType = {
 	blueTeamStarts: ['red', 'red', 'red', 'red', 'red', 'red', 'red', 'red', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'blue', 'yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'yellow', 'black'],
 };
 
-var socket = io();
+//var socket = io();
+var host = window.location.origin; 
+console.log(host);
+var socket = io.connect(host);
+//var socket = io.connect('http://' + host + ":"  + 3000);
+
 
 /* Function Definitions
 *************************************/

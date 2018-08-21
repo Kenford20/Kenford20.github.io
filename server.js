@@ -5,6 +5,9 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
+// io is an object that is created by the socket function
+var io = require('socket.io')(server);
+var port = process.env.PORT || 3000;  //heroku port or default port 3000
 
 app.get('/',function(req,res){
 	res.sendFile(__dirname + '/client/index.html');
@@ -13,7 +16,7 @@ app.get('/',function(req,res){
 //app.use('/client', express.static(__dirname + '/client'));
 app.use(express.static('client'));
 
-server.listen(3000);
+server.listen(port);
 console.log('Server started!');
 
 var socketIDlist = [];
@@ -64,9 +67,6 @@ var gameData = {
 
 /*socket.io setup
 ********************************************/
-// io is an object that creates by the socket function
-var io = require('socket.io')(server,{});
-
 io.sockets.on('connection', function(socket){
 	//console.log('socket connection: '+ socket.id);
 	//socketIDlist.push(socket.id);
