@@ -10,23 +10,26 @@ const text = document.querySelector("#typing-box");
 const dropdownChoice = document.querySelector(".select-box");
 const wpmHTML = document.querySelector(".WPM");
 const cpmHTML = document.querySelector(".CPM");
+const timer = document.querySelector(".timer");
 
-var testText = document.querySelector("#quote-api");
-var APIurl = " "; // change the API url to request from based on user input
-var minutes = 0, seconds = 0, ms = 0; // starting value for the timer
-var alertMessage = "Congratulations, you completed the test in "  + minutes + " minutes and " + seconds + "." + ms + " seconds";
-var interval;
-var completeRandomText = "";
-var APItextData = "abc";
-var spanArray=[];
-var letterArray=[];
-var WPM = 0;
-var CPM = 0;
-var numWords = 0;
-var letterIndex = 0; var wordIndex = 0;
-var numberOfMistakes = 0;
-var randomLetter; var randomWordsString = "";
-var errorState;
+let testText = document.querySelector("#quote-api");
+let APIurl = " "; // change the API url to request from based on user input
+let minutes = 0, seconds = 0, ms = 0; // starting value for the timer
+let alertMessage = "Congratulations, you completed the test in "  + minutes + " minutes and " + seconds + "." + ms + " seconds";
+let interval;
+let completeRandomText = "";
+let APItextData = "abc";
+let spanArray = [];
+let letterArray = [];
+let WPM = 0;
+let CPM = 0;
+let numWords = 0;
+let letterIndex = 0; 
+let wordIndex = 0;
+let numberOfMistakes = 0;
+let randomLetter; 
+let randomWordsString = "";
+let errorState;
 
 
 // Function Defitions
@@ -47,7 +50,7 @@ function dropdownSelection() {
 		case 'words':
 			APIurl = "https://api.datamuse.com/words?sp="+randomLetter+"*";
 			break;
-		}
+	}
 }
 
 // adds the leading zeros to the timer when they're single digit
@@ -59,8 +62,8 @@ function displayZero(time){
 }
 
 // concatenates the different timer values with colons to display timer up to minutes
-function runTimer(){
-	document.querySelector(".timer").innerHTML= displayZero(minutes) + ":" + displayZero(seconds) + ":" + displayZero(ms);
+function runTimer(){ 
+	timer.innerHTML = displayZero(minutes) + ":" + displayZero(seconds) + ":" + displayZero(ms);
 	ms++;
 
 	displayWPM_and_CPM(minutes, seconds, ms);
@@ -73,9 +76,8 @@ function runTimer(){
 	}
 
 	if(ms === 100){
-			ms=0;
+		ms=0;
 		seconds++;
-		//console.log(seconds);
 	}
 }
 
@@ -91,7 +93,7 @@ function startTimer(){
 // reset timer and input box when button is pressed
 function restartTest(){
 	clearInterval(interval);
-	document.querySelector(".timer").innerHTML = "00:00:00";
+	timer.innerHTML = "00:00:00";
 	text.value = "";
 	minutes = 0; seconds = 0; ms = 0;
 	text.style.border = "6px solid grey";
@@ -130,13 +132,13 @@ function displayWPM_and_CPM(mins, secs, ms){
 
 // check if input text equals test text, then changes border color accordingly
 function checkStringEquality() {
-	var textInput = text.value;
-	var completeTestText;
-	var parsedTestText;
+	let textInput = text.value;
+	let completeTestText;
+	let parsedTestText;
 
 	if(dropdownChoice.value == 'alphanumeric'){
 		completeTestText = completeRandomText;
-		parsedTestText = completeRandomText.substring(0,(textInput.length));
+		parsedTestText = completeRandomText.substring(0, textInput.length);
 	}
 	// testTest.innerHTML is full of spans when createHTML is called
 	// so use global variable APItextData instead
@@ -152,24 +154,22 @@ function checkStringEquality() {
 		alert(("Congratulations! You completed the " + dropdownChoice.value + " test in " + minutes + " minutes and " + seconds + "." + ms + " seconds!"));
 		alert(("You made " + numberOfMistakes + " mistakes."));
 		console.log(numberOfMistakes);
+	} else if(textInput == parsedTestText){
+		errorState = false;
+		text.style.border = "8px solid lightblue";
+	} else{
+		if(!errorState)
+			numberOfMistakes++;
+		errorState = true;
+		text.style.border = "8px solid pink";
 	}
-		else if(textInput == parsedTestText){
-			errorState = false;
-			text.style.border = "8px solid lightblue";
-		}
-		else{
-			if(!errorState)
-				numberOfMistakes++;
-			errorState = true;
-			text.style.border = "8px solid pink";
-		}
 }
 	
 // checks for character equality to input text and highlights the word
 function highlightWords(){
-	var textInput = text.value;
-	var textLength = textInput.length;
-	var inputLetter = textInput.substring((textLength-1), (textLength));
+	let textInput = text.value;
+	let textLength = textInput.length;
+	let inputLetter = textInput.substring((textLength - 1), textLength);
 
 	// dont listen for shift and ctrl
 	if(event.which != 16 && event.which != 17){
@@ -179,9 +179,9 @@ function highlightWords(){
 				letterArray[(letterIndex-1)].style.background = "lightblue";
 				letterIndex = letterIndex-2;
 			}
-			var completeTestText = completeRandomText;
-			var parsedTestText = completeRandomText.substring(0,(textInput.length));
-			var textInput = text.value;
+			let completeTestText = completeRandomText;
+			let parsedTestText = completeRandomText.substring(0, textInput.length);
+			let textInput = text.value;
 
 			if(textInput == parsedTestText){
 				console.log(textInput);
@@ -224,7 +224,7 @@ function highlightWords(){
 // creates an array of the text parsed into letters
 function createLetterArray(){
 	for(i=0; i<spanArray.length; i++){
-		var separatedWord = spanArray[i].innerHTML;
+		let separatedWord = spanArray[i].innerHTML;
 		console.log(separatedWord);
 		separatedLetter = separatedWord.split("");
 		for(j=0; j<separatedWord.length; j++){
@@ -242,7 +242,7 @@ function createRandomText() {
   letterArray = [];
   completeRandomText = "";
 
-  for (var i = 0; i < 50; i++) {
+  for (let i = 0; i < 50; i++) {
   		let randomChar = possible.charAt(Math.floor(Math.random() * possible.length));
   		completeRandomText += randomChar;
   		let separatedRandomChar = document.createElement("span");
@@ -260,8 +260,8 @@ function createHTML(APIdata, isAPItext){
 	// only create the HTML elements if data is from an API call
 	if(isAPItext){
 		console.log(APIdata);
-		var testTextValue = APIdata;
-		var separatedText = testTextValue.split(" ");
+		let testTextValue = APIdata;
+		let separatedText = testTextValue.split(" ");
 		console.log(separatedText);
 		// reset the contents of the array to store new data when called again
 		spanArray = [];
@@ -269,8 +269,8 @@ function createHTML(APIdata, isAPItext){
 		testText.innerHTML = ""; // reset current html for appendage below
 
 		for(i = 0; i<separatedText.length; i++){
-			var separatedWord = document.createElement("span");
-			var node = document.createTextNode((separatedText[i] + " "));
+			let separatedWord = document.createElement("span");
+			let node = document.createTextNode((separatedText[i] + " "));
 			separatedWord.appendChild(node);
 			spanArray.push(separatedWord); 
 			testText.appendChild(separatedWord);
@@ -294,7 +294,7 @@ function createRandomWordsString(){
 // the API call to the createHTML function
 function changeTestText() {
 	restartTest();
-	var isAPItext;
+	let isAPItext;
 
 	if(dropdownChoice.value == 'words'){
 		createRandomWordsString();
@@ -324,7 +324,7 @@ function changeTestText() {
 // changeTestText as a callback
 function APIcall(callback){
 
-	var possibleChars = "abcdefghijklmnopqrstuvwxyz";
+	let possibleChars = "abcdefghijklmnopqrstuvwxyz";
 	randomLetter = possibleChars.charAt(Math.floor(Math.random()*possibleChars.length));
 
   	dropdownSelection();
