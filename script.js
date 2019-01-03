@@ -34,9 +34,7 @@ let errorState;
 
 // Function Defitions
 // -------------------------------------------------------
-function dropdownSelection() {
-	console.log(dropdownChoice.value);
-	
+function dropdownSelection() {	
 	switch(dropdownChoice.value){
 		case 'quote':
 			APIurl = "https://talaikis.com/api/quotes/random/";
@@ -153,7 +151,6 @@ function checkStringEquality() {
 		clearInterval(interval);
 		alert(("Congratulations! You completed the " + dropdownChoice.value + " test in " + minutes + " minutes and " + seconds + "." + ms + " seconds!"));
 		alert(("You made " + numberOfMistakes + " mistakes."));
-		console.log(numberOfMistakes);
 	} else if(textInput == parsedTestText){
 		errorState = false;
 		text.style.border = "8px solid lightblue";
@@ -175,7 +172,6 @@ function highlightWords(){
 	if(event.which != 16 && event.which != 17){
 		if(dropdownChoice.value == 'alphanumeric'){
 			if(event.which == 8){
-				console.log(letterIndex);
 				letterArray[(letterIndex-1)].style.background = "lightblue";
 				letterIndex = letterIndex-2;
 			}
@@ -184,16 +180,12 @@ function highlightWords(){
 			let textInput = text.value;
 
 			if(textInput == parsedTestText){
-				console.log(textInput);
-				console.log(parsedTestText);
 				letterArray[letterIndex].style.background = "green";
 				letterArray[letterIndex].style.borderBottom = "2px solid black"
 				letterIndex++;
 			}
 			else{
-				letterArray[letterIndex].style.background = "red";	
-				console.log(textInput);
-				console.log(parsedTestText);			
+				letterArray[letterIndex].style.background = "red";				
 				letterIndex++;
 			}
 		}
@@ -212,8 +204,6 @@ function highlightWords(){
 				}
 			}
 			else {
-				console.log(inputLetter);
-				console.log(letterArray[letterIndex]);
 				spanArray[wordIndex].style.background = "red";
 				spanArray[wordIndex].style.borderRadius = "5px";
 			}
@@ -225,13 +215,11 @@ function highlightWords(){
 function createLetterArray(){
 	for(i=0; i<spanArray.length; i++){
 		let separatedWord = spanArray[i].innerHTML;
-		console.log(separatedWord);
 		separatedLetter = separatedWord.split("");
 		for(j=0; j<separatedWord.length; j++){
 			letterArray.push(separatedLetter[j]);
 		}
 	}
-	console.log(letterArray);
 }
 
 // function creates a string a random alphanumberic characters
@@ -259,10 +247,8 @@ function createRandomText() {
 function createHTML(APIdata, isAPItext){
 	// only create the HTML elements if data is from an API call
 	if(isAPItext){
-		console.log(APIdata);
 		let testTextValue = APIdata;
 		let separatedText = testTextValue.split(" ");
-		console.log(separatedText);
 		// reset the contents of the array to store new data when called again
 		spanArray = [];
 		letterArray = []; 
@@ -286,8 +272,6 @@ function createRandomWordsString(){
 
 	for(i=6;i<60;i++)
 		randomWordsString = APItextData[i].word + " " + randomWordsString;
-
-	console.log(randomWordsString);
 }
 
 // selects the type of text and passes the corresponding response text from 
@@ -323,23 +307,21 @@ function changeTestText() {
 // makes the API request to the designated server and sends the reponse text to 
 // changeTestText as a callback
 function APIcall(callback){
-
 	let possibleChars = "abcdefghijklmnopqrstuvwxyz";
 	randomLetter = possibleChars.charAt(Math.floor(Math.random()*possibleChars.length));
-
   	dropdownSelection();
 
 	let AJAXrequest = new XMLHttpRequest();
-	AJAXrequest.onload = function(){
+	AJAXrequest.onload = () => {
 		if(AJAXrequest.status == 200){	
 			APItextData = JSON.parse(AJAXrequest.responseText);
 			console.log(APItextData);
 			callback();
 		}
 		else if(AJAXrequest.status == 400)
-			console.log("error 400");
+			console.err("error 400");
 		else
-			console.log("failed to load for some reason");
+			console.err("failed to load for some reason");
 	};
 	AJAXrequest.open('GET', APIurl);
 	AJAXrequest.send();
@@ -351,6 +333,6 @@ text.addEventListener("keyup", checkStringEquality, false);
 text.addEventListener("keydown", highlightWords, false);
 text.addEventListener("keypress", startTimer, false);
 text.addEventListener("keyup", countWords, false);
-textbtn.addEventListener("click", function(){ APIcall(changeTestText)});
+textbtn.addEventListener("click", () => { APIcall(changeTestText) });
 restartbtn.addEventListener("click", restartTest, false);
 }
