@@ -31,7 +31,6 @@ let randomLetter;
 let randomWordsString = "";
 let errorState;
 
-
 // Function Defitions
 // -------------------------------------------------------
 function dropdownSelection() {	
@@ -103,6 +102,11 @@ function restartTest(){
 	CPM = 0;
 	numWords = 0;
 	numberOfMistakes = 0;
+	
+	spanArray.map(char => {
+		char.style.background = 'lightblue';
+		char.style.color = 'black';
+	});
 }
 
 // counts the number of words by counting spaces (may be slightly inaccurate)
@@ -111,7 +115,7 @@ function restartTest(){
 function countWords(){
 	let textLength = text.value.length;
 	// create a substring that checks if each new key typed is a space	
-	if(text.value.substring((textLength-1), (textLength)) == " ")
+	if(text.value.substring((textLength-1), textLength) == " ")
 		numWords++;
 }
 
@@ -142,7 +146,7 @@ function checkStringEquality() {
 	// so use global variable APItextData instead
 	else {
 		completeTestText = APItextData;
-		parsedTestText = APItextData.substring(0,(textInput.length));
+		parsedTestText = APItextData.substring(0, textInput.length);
 	}
 
 	// check for equality to input
@@ -213,10 +217,10 @@ function highlightWords(){
 
 // creates an array of the text parsed into letters
 function createLetterArray(){
-	for(i=0; i<spanArray.length; i++){
+	for(let i = 0; i < spanArray.length; i++){
 		let separatedWord = spanArray[i].innerHTML;
 		separatedLetter = separatedWord.split("");
-		for(j=0; j<separatedWord.length; j++){
+		for(let j = 0; j < separatedWord.length; j++){
 			letterArray.push(separatedLetter[j]);
 		}
 	}
@@ -254,7 +258,7 @@ function createHTML(APIdata, isAPItext){
 		letterArray = []; 
 		testText.innerHTML = ""; // reset current html for appendage below
 
-		for(i = 0; i<separatedText.length; i++){
+		for(let i = 0; i < separatedText.length; i++){
 			let separatedWord = document.createElement("span");
 			let node = document.createTextNode((separatedText[i] + " "));
 			separatedWord.appendChild(node);
@@ -265,12 +269,11 @@ function createHTML(APIdata, isAPItext){
 	}
 }
 
-
 // create a string of a lot of words through concatenation
 function createRandomWordsString(){
 	randomWordsString = "";
 
-	for(i=6;i<60;i++)
+	for(let i = 6; i < 60; i++)
 		randomWordsString = APItextData[i].word + " " + randomWordsString;
 }
 
@@ -308,7 +311,7 @@ function changeTestText() {
 // changeTestText as a callback
 function APIcall(callback){
 	let possibleChars = "abcdefghijklmnopqrstuvwxyz";
-	randomLetter = possibleChars.charAt(Math.floor(Math.random()*possibleChars.length));
+	randomLetter = possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
   	dropdownSelection();
 
 	let AJAXrequest = new XMLHttpRequest();
