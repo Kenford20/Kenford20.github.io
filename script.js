@@ -39,7 +39,7 @@ function dropdownSelection() {
 			APIurl = "https://talaikis.com/api/quotes/random/";
 			break;
 		case 'alphanumeric':	
-			APIurl = "https://talaikis.com/api/quotes/random/";
+			APIurl = "https://baconipsum.com/api/?type=all-meat&paras=2&start-with-lorem=1";
 			break;
 		case 'paragraph':
 			APIurl = "https://baconipsum.com/api/?type=all-meat&paras=2&start-with-lorem=1";
@@ -293,8 +293,10 @@ function changeTestText() {
 		APItextData = APItextData.quote;
 		createHTML(APItextData, isAPItext);
 	}
-	else if(dropdownChoice.value == 'alphanumeric')
+	else if(dropdownChoice.value == 'alphanumeric') {
+		isAPItext = false;
 		createRandomText();
+	}
 	else if(dropdownChoice.value == 'paragraph'){
 		isAPItext = true;
 		APItextData = APItextData[0];
@@ -312,7 +314,7 @@ function changeTestText() {
 function APIcall(callback){
 	let possibleChars = "abcdefghijklmnopqrstuvwxyz";
 	randomLetter = possibleChars.charAt(Math.floor(Math.random() * possibleChars.length));
-  	dropdownSelection();
+	dropdownSelection();
 
 	let AJAXrequest = new XMLHttpRequest();
 	AJAXrequest.onload = () => {
