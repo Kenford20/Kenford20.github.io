@@ -3,6 +3,11 @@
 ## A basic web application for users to test their typing speed!
 This was one of the first projects that I have built as I was learning standard web development technologies such as HTML, CSS, and JavaScript. The main purpose of this website was just to practice DOM manipulation and apply other newly learned concepts.
 
+![typing-website](https://user-images.githubusercontent.com/41027303/52193285-7ba33680-281c-11e9-8e9b-723f31b85e7f.png)
+
+## Mobile view 
+![typing-website-mobile](https://user-images.githubusercontent.com/41027303/52193953-bb1f5200-281f-11e9-91ca-252c515d1f6e.png)
+
 ## Demo
 Here is a live working demo: https://kenford20.github.io
 
