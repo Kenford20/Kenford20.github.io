@@ -36,7 +36,7 @@ let errorState;
 function dropdownSelection() {	
 	switch(dropdownChoice.value){
 		case 'quote':
-			APIurl = "https://talaikis.com/api/quotes/random/";
+			APIurl = "https://seinfeld-quotes.herokuapp.com/random";
 			break;
 		case 'alphanumeric':	
 			APIurl = "https://baconipsum.com/api/?type=all-meat&paras=2&start-with-lorem=1";
@@ -168,6 +168,7 @@ function checkStringEquality() {
 	
 // checks for character equality to input text and highlights the word
 function highlightWords(){
+	console.log(text.value)
 	let textInput = text.value;
 	let textLength = textInput.length;
 	let inputLetter = textInput.substring((textLength - 1), textLength);
@@ -180,16 +181,14 @@ function highlightWords(){
 				letterIndex = letterIndex-2;
 			}
 			let completeTestText = completeRandomText;
-			let parsedTestText = completeRandomText.substring(0, textInput.length);
-			let textInput = text.value;
+			let parsedTestText = completeRandomText.substring(0, textLength);
 
 			if(textInput == parsedTestText){
-				letterArray[letterIndex].style.background = "green";
-				letterArray[letterIndex].style.borderBottom = "2px solid black"
+				letterArray[letterIndex].style.background = "lightgreen";
 				letterIndex++;
 			}
 			else{
-				letterArray[letterIndex].style.background = "red";				
+				letterArray[letterIndex].style.background = "pink";				
 				letterIndex++;
 			}
 		}
@@ -317,17 +316,19 @@ function APIcall(callback){
 	dropdownSelection();
 
 	let AJAXrequest = new XMLHttpRequest();
-	AJAXrequest.onload = () => {
-		if(AJAXrequest.status == 200){	
+	AJAXrequest.onreadystatechange = () => {
+		if (AJAXrequest.readyState == XMLHttpRequest.DONE) {
 			APItextData = JSON.parse(AJAXrequest.responseText);
 			console.log(APItextData);
 			callback();
 		}
-		else if(AJAXrequest.status == 400)
-			console.err("error 400");
-		else
-			console.err("failed to load for some reason");
+		else if (AJAXrequest.status >= 400){
+			console.log('Error 400');
+		} 
 	};
+	AJAXrequest.onerror = () => {
+		alert('Please check your internet connection!');
+	}
 	AJAXrequest.open('GET', APIurl);
 	AJAXrequest.send();
 }
