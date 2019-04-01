@@ -85,6 +85,7 @@ body #quote-api{
 	border-radius:7px;
 	padding:20px 50px;
 	min-height: 75px;
+	overflow-wrap: break-word;
 }
 
 #typing-box{
@@ -262,7 +263,8 @@ select:disabled::-ms-expand {
 	}
 
 	.container #quote-api{
-		margin-top:5px;
+		margin-top: 5px;
+		font-size: 15px;
 	}
 
 	.select-box{
